@@ -1,14 +1,14 @@
 <template>
   <header>
     <div class="app-logo">
-      <img alt="Uniswap logo" src="@/assets/logo.svg" />
+      <img alt="Uniswap logo" src="@/assets/images/logo.svg" />
     </div>
 
     <AppNav />
 
     <div class="app-menu">
       <button class="menu-toggler">
-        <img src="@/assets/menu-icon.svg" alt="menu icon" />
+        <img src="@/assets/images/icons/menu-icon.svg" alt="menu icon" />
       </button>
       <ul class="menu-list"></ul>
     </div>
@@ -43,7 +43,6 @@ header {
 .app-menu .menu-toggler {
   display: flex;
   background: $darkBackground;
-  border: none;
   padding: 10px 12px;
   border-radius: 12px;
   line-height: 1;

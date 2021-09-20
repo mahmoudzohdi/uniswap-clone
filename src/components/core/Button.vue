@@ -6,6 +6,7 @@
       `size-${size}`,
       { 'full-width': block },
     ]"
+    v-bind="$attrs"
   >
     <slot />
   </button>
@@ -23,6 +24,7 @@ export default defineComponent({
       validator(value: string) {
         return [
           "default",
+          "text",
           "outlined",
           "primary",
           "primary-text",
@@ -72,6 +74,9 @@ export default defineComponent({
     padding: 16px;
     font-size: 16px;
     border-radius: 20px;
+  }
+  &.variant-text {
+    background: none;
   }
   &.variant-primary {
     background-color: $primary;

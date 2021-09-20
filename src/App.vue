@@ -20,7 +20,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style lang="scss">
 html {
   background-color: #212429;
 }
@@ -52,7 +52,7 @@ body {
   color: #fff;
 }
 a {
-  color: inherit;
+  color: $primary;
 }
 button {
   background: none;

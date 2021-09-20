@@ -68,6 +68,7 @@ export default defineComponent({
       display: flex;
       text-decoration: none;
       padding: 8px 12px;
+      color: inherit;
       &.router-link-exact-active {
         color: #fff;
         background-color: $darkSecondaryBackground;

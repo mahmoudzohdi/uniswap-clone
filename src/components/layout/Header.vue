@@ -1,14 +1,18 @@
 <template>
   <header>
     <div class="app-logo">
-      <img alt="Uniswap logo" src="@/assets/images/logo.svg" />
+      <img src="@/assets/images/logo.svg" alt="Uniswap logo" />
     </div>
 
     <AppNav />
 
     <div class="app-menu">
       <button class="menu-toggler">
-        <img src="@/assets/images/icons/menu-icon.svg" alt="menu icon" />
+        <img
+          class="svg-image-to-white"
+          src="@/assets/images/icons/menu-icon.svg"
+          alt="menu icon"
+        />
       </button>
       <ul class="menu-list"></ul>
     </div>
@@ -48,8 +52,6 @@ header {
   line-height: 1;
   img {
     width: 18px;
-    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(316deg)
-      brightness(109%) contrast(109%);
   }
 }
 </style>

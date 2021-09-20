@@ -1,6 +1,8 @@
 <template>
   <Header />
-  <router-view />
+  <main class="page-content">
+    <router-view />
+  </main>
 </template>
 
 <script lang="ts">
@@ -48,5 +50,15 @@ body {
 }
 a {
   color: inherit;
+}
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.page-content {
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
 }
 </style>

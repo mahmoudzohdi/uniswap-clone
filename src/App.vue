@@ -3,16 +3,19 @@
   <main class="page-content">
     <router-view />
   </main>
+  <ConnectWalletModal />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import Header from "@/components/layout/Header.vue";
+import ConnectWalletModal from "@/components/shared/connect-wallet/ConnectWalletModal.vue";
 
 export default defineComponent({
   name: "App",
   components: {
     Header,
+    ConnectWalletModal,
   },
 });
 </script>
@@ -60,5 +63,9 @@ button {
   display: flex;
   justify-content: center;
   padding: 0 20px;
+}
+.svg-image-to-white {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(316deg)
+    brightness(109%) contrast(109%);
 }
 </style>

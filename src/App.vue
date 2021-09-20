@@ -1,30 +1,52 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+  <Header />
+  <router-view />
 </template>
 
+<script lang="ts">
+import { defineComponent } from "vue";
+import Header from "@/components/layout/Header.vue";
+
+export default defineComponent({
+  name: "App",
+  components: {
+    Header,
+  },
+});
+</script>
+
 <style>
+html {
+  background-color: #212429;
+}
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: -moz-linear-gradient(
+    top,
+    rgba(252, 7, 125, 0.06) 0%,
+    rgba(33, 36, 41, 1) 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    rgba(252, 7, 125, 0.06) 0%,
+    rgba(33, 36, 41, 1) 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    rgba(252, 7, 125, 0.06) 0%,
+    rgba(33, 36, 41, 1) 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0ffc077d', endColorstr='#212429',GradientType=0 ); /* IE6-9 */
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  font-weight: 500;
+  color: #fff;
 }
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+a {
+  color: inherit;
 }
 </style>

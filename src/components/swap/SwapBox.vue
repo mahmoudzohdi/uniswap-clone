@@ -5,14 +5,47 @@
       <div class="box-settings">
         <button class="settings-toggler">
           <img
+            class="svg-image-to-white"
             src="@/assets/images/icons/settings-icon.svg"
             alt="settings icon"
           />
         </button>
       </div>
     </header>
+
+    <footer>
+      <Button
+        variant="primary-text"
+        size="large"
+        block
+        @click="openWalletsModal"
+      >
+        Connect Wallet
+      </Button>
+    </footer>
   </section>
 </template>
+
+<script>
+import { defineComponent } from "vue";
+import Button from "@/components/core/Button.vue";
+import { createNamespacedHelpers } from "vuex";
+
+const { mapActions } = createNamespacedHelpers("WalletModule");
+
+export default defineComponent({
+  name: "SwapBox",
+  components: {
+    Button,
+  },
+  methods: {
+    ...mapActions(["openConnectWalletModal"]),
+    openWalletsModal() {
+      this.openConnectWalletModal();
+    },
+  },
+});
+</script>
 
 <style lang="scss" scoped>
 .swap-box {
@@ -35,8 +68,6 @@
   .settings-toggler {
     img {
       width: 20px;
-      filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(316deg)
-        brightness(109%) contrast(109%);
     }
   }
 }

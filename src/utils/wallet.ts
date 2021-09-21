@@ -12,7 +12,6 @@ export const connectMetaMask = (): Promise<string[]> => {
 
 export const getWalletAccounts = (): Promise<string[]> => {
   if (MetaMaskOnboarding.isMetaMaskInstalled()) {
-    console.log("connected? ", window["ethereum"].isConnected());
     return window["ethereum"].request({ method: "eth_requestAccounts" });
   }
   return Promise.resolve([]);

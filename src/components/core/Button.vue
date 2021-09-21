@@ -35,6 +35,8 @@ export default defineComponent({
           "error",
           "error-text",
           "error-outlined",
+          "dark",
+          "dark-secondary",
         ].includes(value);
       },
     },
@@ -64,7 +66,7 @@ export default defineComponent({
   background-color: $gray;
   color: #fff;
   line-height: 1;
-  &:hover {
+  &:hover:not(:disabled) {
     opacity: 0.85;
   }
   &.full-width {
@@ -113,6 +115,27 @@ export default defineComponent({
       background-color: $errorTransparent;
       color: $error;
     }
+  }
+  &.variant-dark {
+    background-color: $darkBackground;
+    &-outlined {
+      background-color: transparent;
+      color: $darkBackground;
+      border-color: $darkBackground;
+    }
+  }
+  &.variant-dark-secondary {
+    background-color: $darkSecondaryBackground;
+    &-outlined {
+      background-color: transparent;
+      color: $darkSecondaryBackground;
+      border-color: $darkSecondaryBackground;
+    }
+  }
+  &:disabled {
+    cursor: default;
+    background-color: $darkBorderColor;
+    color: $grayText;
   }
 }
 </style>

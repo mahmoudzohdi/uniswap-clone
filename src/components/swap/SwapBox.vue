@@ -13,14 +13,36 @@
       </div>
     </header>
 
+    <article class="box-body">
+      <div class="currency-input">
+        <div class="input-holder">
+          <Button variant="primary">Select a token</Button>
+          <input placeholder="0.0" />
+        </div>
+        <p class="input-note">
+          Balance: 0 ETH
+        </p>
+      </div>
+      <div class="currency-input">
+        <div class="input-holder">
+          <Button variant="primary">Select a token</Button>
+          <input placeholder="0.0" />
+        </div>
+        <p class="input-note">
+          Balance: 0 ETH
+        </p>
+      </div>
+    </article>
+
     <footer>
       <Button
         variant="primary-text"
         size="large"
         block
+        :disabled="accounts?.length"
         @click="openWalletsModal"
       >
-        Connect Wallet
+        {{ accounts?.length ? "Enter an amount" : "Connect Wallet" }}
       </Button>
     </footer>
   </section>
@@ -31,18 +53,27 @@ import { defineComponent } from "vue";
 import Button from "@/components/core/Button.vue";
 import { createNamespacedHelpers } from "vuex";
 
-const { mapActions } = createNamespacedHelpers("WalletModule");
+const { mapState, mapActions } = createNamespacedHelpers("WalletModule");
 
 export default defineComponent({
   name: "SwapBox",
   components: {
     Button,
   },
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapState(["accounts", "tokens"]),
+  },
   methods: {
-    ...mapActions(["openConnectWalletModal"]),
+    ...mapActions(["openConnectWalletModal", "getTokens"]),
     openWalletsModal() {
       this.openConnectWalletModal();
     },
+  },
+  created() {
+    this.getTokens();
   },
 });
 </script>
@@ -69,6 +100,40 @@ export default defineComponent({
     img {
       width: 20px;
     }
+  }
+}
+.box-body {
+  margin-bottom: 8px;
+}
+.currency-input {
+  border-radius: 20px;
+  border: 1px solid $darkBorderColor;
+  background-color: $darkSecondaryBackground;
+  padding: 16px;
+  margin-bottom: 4px;
+  &:hover {
+    border-color: $darkBorderSecondaryColor;
+  }
+  .input-holder {
+    display: flex;
+    justify-content: space-between;
+  }
+  input {
+    background: none;
+    border: none;
+    font-size: 24px;
+    text-align: right;
+    color: #fff;
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+  .input-note {
+    font-size: 14px;
+    font-weight: 400;
+    color: $grayText;
+    margin: 12px 0 0;
   }
 }
 </style>

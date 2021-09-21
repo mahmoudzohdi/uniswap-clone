@@ -30,7 +30,7 @@ import { defineComponent } from "vue";
 import Button from "@/components/core/Button.vue";
 
 export default defineComponent({
-  name: "AppModal",
+  name: "Modal",
   components: {
     Button,
   },

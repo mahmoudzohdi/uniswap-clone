@@ -1,5 +1,5 @@
 <template>
-  <AppModal ref="modal" title="Connect to a wallet" @onHide="onHide">
+  <Modal ref="modal" title="Connect to a wallet" @onHide="onHide">
     <Info>
       By connecting a wallet, you agree to Uniswap Labs’
       <a href="https://uniswap.org/terms-of-service/" target="_blank"
@@ -17,12 +17,12 @@
       :walletInfo="item"
       @connected="onHide"
     />
-  </AppModal>
+  </Modal>
 </template>
 
 <script>
 import { defineComponent } from "vue";
-import AppModal from "@/components/core/Modal.vue";
+import Modal from "@/components/core/Modal.vue";
 import Info from "@/components/core/Info.vue";
 import WalletItem from "./WalletItem.vue";
 import { connectMetaMask } from "@/utils/wallet";
@@ -35,7 +35,7 @@ const { mapState, mapActions } = createNamespacedHelpers("WalletModule");
 export default defineComponent({
   name: "ConnectWalletModal",
   components: {
-    AppModal,
+    Modal,
     Info,
     WalletItem,
   },

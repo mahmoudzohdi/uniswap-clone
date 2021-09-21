@@ -10,6 +10,13 @@
         >Uniswap protocol disclaimer</a
       >.
     </Info>
+
+    <WalletItem
+      v-for="(item, index) in walletProviders"
+      :key="index"
+      :walletInfo="item"
+      @connected="onHide"
+    />
   </AppModal>
 </template>
 
@@ -17,6 +24,10 @@
 import { defineComponent } from "vue";
 import AppModal from "@/components/core/Modal.vue";
 import Info from "@/components/core/Info.vue";
+import WalletItem from "./WalletItem.vue";
+import { connectMetaMask } from "@/utils/wallet";
+import MetaMaskOnboarding from "@metamask/onboarding";
+
 import { createNamespacedHelpers } from "vuex";
 
 const { mapState, mapActions } = createNamespacedHelpers("WalletModule");
@@ -26,6 +37,20 @@ export default defineComponent({
   components: {
     AppModal,
     Info,
+    WalletItem,
+  },
+  data() {
+    return {
+      walletProviders: [
+        {
+          name: MetaMaskOnboarding.isMetaMaskInstalled()
+            ? "Metamask"
+            : "Install Metamask",
+          image: require("@/assets/images/metamask-logo.png"),
+          onClick: connectMetaMask,
+        },
+      ],
+    };
   },
   computed: {
     ...mapState({

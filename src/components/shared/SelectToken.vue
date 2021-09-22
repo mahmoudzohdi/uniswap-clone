@@ -19,16 +19,16 @@
           <div class="section-body">
             <Button
               variant="outlined"
-              class="common-currency"
+              class="common-token"
               v-for="token in commonTokens"
               :key="token.symbol"
             >
               <img
-                class="currency-image"
+                class="token-image"
                 :src="token.logoURI"
                 :alt="`${token.name} logo`"
               />
-              <h3 class="currency-name">
+              <h3 class="token-name">
                 {{ token.symbol }}
               </h3>
             </Button>
@@ -38,7 +38,7 @@
       <ul class="currencies-list">
         <template v-for="token in tokens">
           <li
-            class="currency-item"
+            class="token-item"
             :key="token.symbol"
             v-if="
               !searchText ||
@@ -46,11 +46,11 @@
             "
           >
             <img
-              class="currency-image"
+              class="token-image"
               :src="token.logoURI"
               :alt="`${token.name} logo`"
             />
-            <h3 class="currency-name">
+            <h3 class="token-name">
               {{ token.symbol }}
               <span class="full-name">{{ token.name }}</span>
             </h3>
@@ -79,11 +79,16 @@ import { createNamespacedHelpers } from "vuex";
 
 const { mapState } = createNamespacedHelpers("WalletModule");
 export default {
-  name: "SelectCurrency",
+  name: "SelectToken",
   components: {
     Modal,
     Button,
     InfoTooltip,
+  },
+  props: {
+    modelValue: {
+      type: String,
+    },
   },
   data() {
     return {
@@ -96,6 +101,9 @@ export default {
   methods: {
     openModal() {
       this.$refs["modal"].show();
+    },
+    selectToken(token) {
+      this.$emit("update:modelValue", token.symbol);
     },
   },
 };
@@ -129,7 +137,7 @@ export default {
   padding: 0;
   border-top: 1px solid $darkBorderColor;
 }
-.currency-item {
+.token-item {
   display: flex;
   align-items: center;
   padding: 10px 20px;
@@ -138,18 +146,18 @@ export default {
     background-color: $darkBorderColor;
   }
 }
-.common-currency {
+.common-token {
   display: inline-flex;
   margin-right: 8px;
   margin-bottom: 8px;
   align-items: center;
 }
-.currency-image {
+.token-image {
   width: 24px;
   border-radius: 50%;
   margin-right: 15px;
 }
-.currency-name {
+.token-name {
   font-size: 16px;
   margin: 0;
   text-transform: uppercase;

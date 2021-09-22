@@ -3,4 +3,6 @@ export default () => ({
     visibility: false,
   },
   accounts: [],
+  tokens: [],
+  commonTokens: [],
 });

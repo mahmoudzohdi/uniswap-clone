@@ -9,5 +9,6 @@ export default {
   },
   SET_TOKENS(state, tokens: Token[]): void {
     state.tokens = tokens;
+    state.commonTokens = tokens.slice(0, 6); // just a mocking the common tokens
   },
 };

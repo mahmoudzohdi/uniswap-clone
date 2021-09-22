@@ -16,20 +16,20 @@
     <article class="box-body">
       <div class="currency-input">
         <div class="input-holder">
-          <SelectToken v-model="swapFrom.token" />
-          <input placeholder="0.0" v-model="swapFrom.vaue" />
+          <SelectToken v-model="swapFrom.address" />
+          <input placeholder="0.0" v-model="swapFrom.value" />
         </div>
-        <p class="input-note">
-          Balance: 0 ETH
+        <p class="input-note" v-if="isMetaMaskInstalled && swapFrom.address">
+          Balance: 0 {{ getTokenByAddress(swapFrom.address).symbol }}
         </p>
       </div>
       <div class="currency-input">
         <div class="input-holder">
-          <SelectToken v-model="swapTo.token" />
-          <input placeholder="0.0" v-model="swapFrom.vaue" />
+          <SelectToken v-model="swapTo.address" />
+          <input placeholder="0.0" v-model="swapTo.value" />
         </div>
-        <p class="input-note">
-          Balance: 0 ETH
+        <p class="input-note" v-if="isMetaMaskInstalled && swapTo.address">
+          Balance: 0 {{ getTokenByAddress(swapTo.address).symbol }}
         </p>
       </div>
     </article>
@@ -50,6 +50,7 @@
 
 <script>
 import { defineComponent } from "vue";
+import MetaMaskOnboarding from "@metamask/onboarding";
 import Button from "@/components/core/Button.vue";
 import SelectToken from "@/components/shared/SelectToken.vue";
 import { createNamespacedHelpers } from "vuex";
@@ -64,12 +65,13 @@ export default defineComponent({
   },
   data() {
     return {
+      isMetaMaskInstalled: MetaMaskOnboarding.isMetaMaskInstalled(),
       swapFrom: {
-        token: "",
+        address: "",
         value: "",
       },
       swapTo: {
-        token: "",
+        address: "",
         value: "",
       },
     };
@@ -79,6 +81,9 @@ export default defineComponent({
   },
   methods: {
     ...mapActions(["openConnectWalletModal", "getTokens"]),
+    getTokenByAddress(address) {
+      return this.tokens.find((token) => token.address === address);
+    },
   },
   created() {
     this.getTokens();

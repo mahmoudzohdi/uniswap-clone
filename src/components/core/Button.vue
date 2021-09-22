@@ -4,6 +4,7 @@
       'app-button',
       `variant-${variant}`,
       `size-${size}`,
+      { 'no-padding': noPadding },
       { 'full-width': block },
     ]"
     v-bind="$attrs"
@@ -25,6 +26,7 @@ export default defineComponent({
         return [
           "default",
           "text",
+          "text-primary",
           "outlined",
           "primary",
           "primary-text",
@@ -41,6 +43,10 @@ export default defineComponent({
       },
     },
     block: {
+      type: Boolean,
+      default: false,
+    },
+    noPadding: {
       type: Boolean,
       default: false,
     },
@@ -77,19 +83,31 @@ export default defineComponent({
     font-size: 16px;
     border-radius: 20px;
   }
-  &.variant-text {
+  &[class*="variant-text"] {
     background: none;
+  }
+
+  &.variant-outlined {
+    background-color: transparent;
+    border-color: $darkBorderSecondaryColor;
+    &:hover {
+      background-color: $darkBorderColor;
+    }
+  }
+  &.variant-text-primary {
+    color: $primary;
   }
   &.variant-primary {
     background-color: $primary;
     &-outlined {
       background-color: transparent;
-      color: $success;
-      border-color: $success;
+      color: $primary;
+      border-color: $primary;
     }
     &-text {
       background-color: $primaryTransparent;
       color: $primaryLight;
+      border-color: $primaryTransparent;
     }
   }
   &.variant-success {

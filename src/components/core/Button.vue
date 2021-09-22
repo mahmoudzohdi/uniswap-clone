@@ -6,6 +6,7 @@
       `size-${size}`,
       { 'no-padding': noPadding },
       { 'full-width': block },
+      { rounded: rounded },
     ]"
     v-bind="$attrs"
   >
@@ -50,6 +51,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    rounded: {
+      type: Boolean,
+      default: false,
+    },
     size: {
       type: String,
       default: "default",
@@ -77,6 +82,11 @@ export default defineComponent({
   }
   &.full-width {
     width: 100%;
+  }
+  &.rounded {
+    border-radius: 30px;
+    padding-right: 10px;
+    padding-left: 10px;
   }
   &.size-large {
     padding: 16px;

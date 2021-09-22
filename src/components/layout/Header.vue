@@ -10,6 +10,16 @@
       <Button v-if="accounts.length" variant="dark" class="user-wallet">
         {{ truncate(accounts[0], 10) }}
       </Button>
+      <Button
+        v-else
+        class="connect-wallet-button"
+        variant="primary-text"
+        block
+        :disabled="accounts?.length"
+        @click="openConnectWalletModal"
+      >
+        {{ "Connect Wallet" }}
+      </Button>
       <Button variant="dark" class="menu-toggler">
         <img
           class="svg-image-to-white"
@@ -45,7 +55,7 @@ export default defineComponent({
     ...mapState(["accounts"]),
   },
   methods: {
-    ...mapActions(["setAccounts"]),
+    ...mapActions(["openConnectWalletModal", "setAccounts"]),
   },
   mounted() {
     if (
@@ -86,5 +96,8 @@ header {
       width: 18px;
     }
   }
+}
+.connect-wallet-button {
+  margin-right: 8px;
 }
 </style>

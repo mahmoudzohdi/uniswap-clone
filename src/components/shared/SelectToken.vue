@@ -43,7 +43,7 @@
             <Button
               variant="outlined"
               class="token-button"
-              v-for="token in commonTokens"
+              v-for="token in tokens.common"
               :key="token.symbol"
               :disabled="token.address === modelValue"
               @click="selectToken(token)"
@@ -61,7 +61,7 @@
         </div>
       </div>
       <ul class="currencies-list">
-        <template v-for="token in tokens">
+        <template v-for="token in tokens.data">
           <li
             :class="['token-item', { selected: token.address === modelValue }]"
             @click="selectToken(token)"
@@ -119,9 +119,11 @@ export default {
     };
   },
   computed: {
-    ...mapState(["tokens", "commonTokens"]),
+    ...mapState(["tokens"]),
     selectedToken() {
-      return this.tokens.find((token) => token.address === this.modelValue);
+      return this.tokens.data.find(
+        (token) => token.address === this.modelValue
+      );
     },
   },
   methods: {

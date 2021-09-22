@@ -82,7 +82,7 @@ export default defineComponent({
   methods: {
     ...mapActions(["openConnectWalletModal", "getTokens"]),
     getTokenByAddress(address) {
-      return this.tokens.find((token) => token.address === address);
+      return this.tokens.data.find((token) => token.address === address);
     },
   },
   created() {

@@ -1,7 +1,7 @@
 <template>
   <div class="wallet-item" @click="walletItemClickHandler">
     <h4 class="item-name">
-      <Spinner size="small" class="loader" />
+      <Spinner v-if="loading" size="small" class="loader" />
       {{ walletInfo.name }}
     </h4>
     <img
@@ -39,11 +39,17 @@ export default defineComponent({
   methods: {
     ...mapActions(["setAccounts"]),
     walletItemClickHandler() {
+      this.loading = true;
       this.walletInfo.onClick &&
-        this.walletInfo.onClick().then((accounts: string[]) => {
-          this.setAccounts(accounts);
-          this.$emit("connected");
-        });
+        this.walletInfo
+          .onClick()
+          .then((accounts: string[]) => {
+            this.setAccounts(accounts);
+            this.$emit("connected");
+          })
+          .finally(() => {
+            this.loading = false;
+          });
     },
   },
 });

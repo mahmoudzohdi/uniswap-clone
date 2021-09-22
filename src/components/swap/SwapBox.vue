@@ -25,7 +25,7 @@
       </div>
       <div class="currency-input">
         <div class="input-holder">
-          <SelectToken v-model="swapFrom.token" />
+          <SelectToken v-model="swapTo.token" />
           <input placeholder="0.0" v-model="swapFrom.vaue" />
         </div>
         <p class="input-note">

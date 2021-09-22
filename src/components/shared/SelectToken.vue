@@ -29,7 +29,7 @@
         <input
           type="text"
           class="search-input"
-          placeholder="Search name"
+          placeholder="Search name or paste address"
           v-model="searchText"
         />
         <div class="common-tokens-section">
@@ -45,6 +45,7 @@
               class="token-button"
               v-for="token in commonTokens"
               :key="token.symbol"
+              :disabled="token.address === modelValue"
               @click="selectToken(token)"
             >
               <img
@@ -62,13 +63,10 @@
       <ul class="currencies-list">
         <template v-for="token in tokens">
           <li
-            class="token-item"
+            :class="['token-item', { selected: token.address === modelValue }]"
             @click="selectToken(token)"
             :key="token.symbol"
-            v-if="
-              !searchText ||
-                token.name.toLowerCase().includes(searchText.toLowerCase())
-            "
+            v-if="isTokenVisible(token)"
           >
             <img
               class="token-image"
@@ -123,7 +121,7 @@ export default {
   computed: {
     ...mapState(["tokens", "commonTokens"]),
     selectedToken() {
-      return this.tokens.find((token) => token.symbol === this.modelValue);
+      return this.tokens.find((token) => token.address === this.modelValue);
     },
   },
   methods: {
@@ -134,8 +132,17 @@ export default {
       this.$refs["modal"].hide();
     },
     selectToken(token) {
-      this.$emit("update:modelValue", token.symbol);
-      this.hideModal();
+      if (token.address !== this.modelValue) {
+        this.$emit("update:modelValue", token.address);
+        this.hideModal();
+      }
+    },
+    isTokenVisible(token) {
+      return (
+        !this.searchText ||
+        token.name.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        token.address === this.searchText
+      );
     },
   },
 };
@@ -177,6 +184,10 @@ export default {
   &:hover {
     background-color: $darkBorderColor;
   }
+  &.selected {
+    opacity: 0.5;
+    cursor: default;
+  }
 }
 .select-token-button {
   font-size: 18px;
@@ -190,6 +201,12 @@ export default {
   margin-right: 8px;
   margin-bottom: 8px;
   align-items: center;
+  &:disabled {
+    cursor: default;
+    img {
+      filter: grayscale(100%);
+    }
+  }
 }
 .token-image {
   width: 24px;

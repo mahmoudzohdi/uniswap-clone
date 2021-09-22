@@ -1,6 +1,29 @@
 <template>
   <div>
-    <Button variant="primary" @click="openModal">Select a token</Button>
+    <Button
+      class="select-token-button token-button"
+      :variant="modelValue ? 'dark' : 'primary'"
+      rounded
+      @click="openModal"
+    >
+      <template v-if="modelValue">
+        <img
+          class="token-image"
+          :src="selectedToken.logoURI"
+          :alt="`${selectedToken.name} logo`"
+        />
+        <h3 class="token-name">
+          {{ selectedToken.symbol }}
+        </h3>
+      </template>
+      <template v-else>
+        Select a token
+      </template>
+      <img
+        class="svg-image-to-white select-token-icon"
+        src="@/assets/images/icons/angle-bottom.svg"
+      />
+    </Button>
     <Modal ref="modal" title="Select a token" no-body-padding>
       <div class="tokens-filters">
         <input
@@ -19,9 +42,10 @@
           <div class="section-body">
             <Button
               variant="outlined"
-              class="common-token"
+              class="token-button"
               v-for="token in commonTokens"
               :key="token.symbol"
+              @click="selectToken(token)"
             >
               <img
                 class="token-image"
@@ -39,6 +63,7 @@
         <template v-for="token in tokens">
           <li
             class="token-item"
+            @click="selectToken(token)"
             :key="token.symbol"
             v-if="
               !searchText ||
@@ -97,13 +122,20 @@ export default {
   },
   computed: {
     ...mapState(["tokens", "commonTokens"]),
+    selectedToken() {
+      return this.tokens.find((token) => token.symbol === this.modelValue);
+    },
   },
   methods: {
     openModal() {
       this.$refs["modal"].show();
     },
+    hideModal() {
+      this.$refs["modal"].hide();
+    },
     selectToken(token) {
       this.$emit("update:modelValue", token.symbol);
+      this.hideModal();
     },
   },
 };
@@ -146,7 +178,14 @@ export default {
     background-color: $darkBorderColor;
   }
 }
-.common-token {
+.select-token-button {
+  font-size: 18px;
+}
+.select-token-icon {
+  width: 11px;
+  margin-left: 10px;
+}
+.token-button {
   display: inline-flex;
   margin-right: 8px;
   margin-bottom: 8px;

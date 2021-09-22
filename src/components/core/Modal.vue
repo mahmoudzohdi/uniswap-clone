@@ -75,6 +75,7 @@ export default defineComponent({
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: 1;
   background-color: rgba(0, 0, 0, 0.5);
   overflow-y: auto;
 

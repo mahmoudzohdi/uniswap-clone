@@ -15,11 +15,18 @@
           </Button>
         </header>
 
-        <article class="app-modal-body">
+        <article
+          :class="[
+            'app-modal-body',
+            { 'no-body-padding': noBodyPadding, 'no-footer': !$slots.footer },
+          ]"
+        >
           <slot />
         </article>
 
-        <footer class="app-modal-footer"></footer>
+        <footer v-if="$slots.footer" class="app-modal-footer">
+          <slot name="footer"></slot>
+        </footer>
       </section>
     </div>
   </transition>
@@ -38,6 +45,9 @@ export default defineComponent({
     title: {
       type: String,
       required: true,
+    },
+    noBodyPadding: {
+      type: Boolean,
     },
   },
   data() {
@@ -66,6 +76,7 @@ export default defineComponent({
   bottom: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
 
   display: flex;
   justify-content: center;
@@ -78,9 +89,10 @@ export default defineComponent({
   border: 1px solid $darkSecondaryBackground;
   border-radius: 20px;
   background-color: $darkBackground;
-  padding: 16px;
+  overflow: hidden;
 }
 .app-modal-header {
+  padding: 16px;
   display: flex;
   justify-content: space-between;
   .header-title {
@@ -90,6 +102,19 @@ export default defineComponent({
     width: 20px;
     padding: 0;
   }
+}
+.app-modal-body {
+  &:not(.no-body-padding) {
+    padding: 0 16px;
+    &.no-footer {
+      padding-bottom: 16px;
+    }
+  }
+}
+.app-modal-footer {
+  padding: 16px;
+  background-color: $darkSecondaryBackground;
+  border-top: 1px solid $darkBorderColor;
 }
 .fade-enter-active,
 .fade-leave-active {

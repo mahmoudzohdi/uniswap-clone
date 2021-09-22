@@ -16,8 +16,8 @@
     <article class="box-body">
       <div class="currency-input">
         <div class="input-holder">
-          <Button variant="primary">Select a token</Button>
-          <input placeholder="0.0" />
+          <SelectToken v-model="swapFrom.token" />
+          <input placeholder="0.0" v-model="swapFrom.vaue" />
         </div>
         <p class="input-note">
           Balance: 0 ETH
@@ -25,8 +25,8 @@
       </div>
       <div class="currency-input">
         <div class="input-holder">
-          <Button variant="primary">Select a token</Button>
-          <input placeholder="0.0" />
+          <SelectToken v-model="swapFrom.token" />
+          <input placeholder="0.0" v-model="swapFrom.vaue" />
         </div>
         <p class="input-note">
           Balance: 0 ETH
@@ -40,7 +40,7 @@
         size="large"
         block
         :disabled="accounts?.length"
-        @click="openWalletsModal"
+        @click="openConnectWalletModal"
       >
         {{ accounts?.length ? "Enter an amount" : "Connect Wallet" }}
       </Button>
@@ -51,6 +51,7 @@
 <script>
 import { defineComponent } from "vue";
 import Button from "@/components/core/Button.vue";
+import SelectToken from "@/components/shared/SelectToken.vue";
 import { createNamespacedHelpers } from "vuex";
 
 const { mapState, mapActions } = createNamespacedHelpers("WalletModule");
@@ -59,18 +60,25 @@ export default defineComponent({
   name: "SwapBox",
   components: {
     Button,
+    SelectToken,
   },
   data() {
-    return {};
+    return {
+      swapFrom: {
+        token: "",
+        value: "",
+      },
+      swapTo: {
+        token: "",
+        value: "",
+      },
+    };
   },
   computed: {
     ...mapState(["accounts", "tokens"]),
   },
   methods: {
     ...mapActions(["openConnectWalletModal", "getTokens"]),
-    openWalletsModal() {
-      this.openConnectWalletModal();
-    },
   },
   created() {
     this.getTokens();

@@ -58,7 +58,7 @@ export default defineComponent({
     }),
   },
   methods: {
-    ...mapActions(["openConnectWalletModal", "closeConnectWalletModal"]),
+    ...mapActions(["closeConnectWalletModal"]),
     show() {
       this.$refs.modal.show();
     },

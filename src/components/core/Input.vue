@@ -1,5 +1,11 @@
 <template>
-  <input type="text" class="app-input" v-bind="$attrs" @input="inputHandler" />
+  <input
+    type="text"
+    :class="`app-input size-${size}`"
+    v-bind="$attrs"
+    :value="modelValue"
+    @input="inputHandler"
+  />
 </template>
 
 <script>
@@ -8,6 +14,13 @@ export default {
   props: {
     modelValue: {
       type: String,
+    },
+    size: {
+      type: String,
+      default: "medium",
+      validator(value) {
+        return ["medium", "large"].includes(value);
+      },
     },
   },
   methods: {
@@ -22,11 +35,18 @@ export default {
 .app-input {
   width: 100%;
   background: none;
-  padding: 16px;
+  font-size: 16px;
+  padding: 5px 12px;
   border-radius: 20px;
   border: 1px solid $darkBorderSecondaryColor;
-  font-size: 18px;
+  background-color: $darkSecondaryBackground;
   box-sizing: border-box;
+
+  &.size-large {
+    font-size: 18px;
+    padding: 16px;
+  }
+  &,
   &:focus {
     outline: none;
     color: #fff;

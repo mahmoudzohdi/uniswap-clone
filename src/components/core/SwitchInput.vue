@@ -1,5 +1,5 @@
 <template>
-  <label class="toggle-button">
+  <label :class="`toggle-button size-${size}`">
     <input type="checkbox" :checked="modelValue" @change="changeHandler" />
     <span class="toggle-label toggle-on">On</span>
     <span class="toggle-label toggle-off">Off</span>
@@ -13,6 +13,13 @@ export default {
   props: {
     modelValue: {
       type: Boolean,
+    },
+    size: {
+      type: String,
+      default: "medium",
+      validator(value) {
+        return ["small", "medium", "large"].includes(value);
+      },
     },
   },
   methods: {
@@ -29,7 +36,7 @@ export default {
   width: 70px;
   height: 35px;
   background: $darkSecondaryBackground;
-  border-radius: 20px;
+  border-radius: 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,16 +45,32 @@ export default {
   position: relative;
   transition: all 0.25s;
   cursor: pointer;
+  .toggle-label {
+    width: 50%;
+    color: $gray;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  &.size-small {
+    width: 56px;
+    height: 28px;
+    .toggle-label {
+      font-size: 11px;
+    }
+  }
+  &.size-large {
+    width: 90px;
+    height: 45px;
+    padding: 0 8px;
+    .toggle-label {
+      font-size: 15px;
+    }
+  }
 }
-.toggle-label {
-  width: 50%;
-  color: $gray;
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  opacity: 0;
-  transition: opacity 0.25s;
-}
+
 .toggle-button input[type="checkbox"] {
   opacity: 0;
   position: absolute;

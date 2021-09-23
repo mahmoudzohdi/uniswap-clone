@@ -1,25 +1,46 @@
 <template>
-  <div class="tokens-filters">
-    <Input
-      size="large"
-      placeholder="Search name or paste address"
-      v-model="searchText"
-    />
-    <div class="common-tokens-section">
-      <h5 class="section-title">
-        Common bases
-        <InfoTooltip
-          text="These tokens are commonly paired with other tokens."
-        />
-      </h5>
-      <div class="section-body">
-        <Button
-          variant="outlined"
-          class="token-button"
-          v-for="token in commonTokens"
-          :key="token.symbol"
-          :disabled="token.address === modelValue"
+  <div>
+    <div class="tokens-filters">
+      <Input
+        size="large"
+        placeholder="Search name or paste address"
+        v-model="searchText"
+      />
+      <div class="common-tokens-section">
+        <h5 class="section-title">
+          Common bases
+          <InfoTooltip
+            text="These tokens are commonly paired with other tokens."
+          />
+        </h5>
+        <div class="section-body">
+          <Button
+            variant="outlined"
+            class="token-button"
+            v-for="token in commonTokens"
+            :key="token.symbol"
+            :disabled="token.address === modelValue"
+            @click="selectToken(token)"
+          >
+            <img
+              class="token-image"
+              :src="token.logoURI"
+              :alt="`${token.name} logo`"
+            />
+            <h3 class="token-name">
+              {{ token.symbol }}
+            </h3>
+          </Button>
+        </div>
+      </div>
+    </div>
+    <ul class="currencies-list">
+      <template v-for="token in tokens">
+        <li
+          :class="['token-item', { selected: token.address === modelValue }]"
           @click="selectToken(token)"
+          :key="token.symbol"
+          v-if="isTokenVisible(token)"
         >
           <img
             class="token-image"
@@ -28,31 +49,12 @@
           />
           <h3 class="token-name">
             {{ token.symbol }}
+            <span class="full-name">{{ token.name }}</span>
           </h3>
-        </Button>
-      </div>
-    </div>
+        </li>
+      </template>
+    </ul>
   </div>
-  <ul class="currencies-list">
-    <template v-for="token in tokens">
-      <li
-        :class="['token-item', { selected: token.address === modelValue }]"
-        @click="selectToken(token)"
-        :key="token.symbol"
-        v-if="isTokenVisible(token)"
-      >
-        <img
-          class="token-image"
-          :src="token.logoURI"
-          :alt="`${token.name} logo`"
-        />
-        <h3 class="token-name">
-          {{ token.symbol }}
-          <span class="full-name">{{ token.name }}</span>
-        </h3>
-      </li>
-    </template>
-  </ul>
 </template>
 
 <script>

@@ -13,3 +13,10 @@ export interface Token {
   address: string;
   logoURI: string;
 }
+export interface TokensProvider {
+  name: string;
+  endpoint: string;
+  logoURI: string;
+  tokens: string[] | null;
+  enabled: boolean;
+}

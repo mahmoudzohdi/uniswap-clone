@@ -77,6 +77,9 @@ export default defineComponent({
   background-color: $gray;
   color: #fff;
   line-height: 1;
+  &.no-padding {
+    padding: 0;
+  }
   &:hover:not(:disabled) {
     opacity: 0.85;
   }

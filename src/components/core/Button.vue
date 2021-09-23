@@ -167,6 +167,7 @@ export default defineComponent({
     cursor: default;
     background-color: $darkBorderColor;
     color: $grayText;
+    border-color: transparent;
   }
 }
 </style>

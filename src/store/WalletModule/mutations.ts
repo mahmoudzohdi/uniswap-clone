@@ -10,10 +10,6 @@ export default {
   SET_ACCOUNT_ADDRESS(state, accountAddress: string): void {
     state.accountAddress = accountAddress;
   },
-  SET_TOKENS(state, tokens: Token[]): void {
-    state.tokens = tokens;
-    state.commonTokens = tokens.slice(0, 6); // just a mocking the common tokens
-  },
   UPDATE_PROVIDER(state, provider: TokensProvider) {
     state.manageTokenListsModal.providers = state.manageTokenListsModal.providers.map(
       (_provider: TokensProvider) => {

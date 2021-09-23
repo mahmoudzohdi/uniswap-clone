@@ -68,7 +68,7 @@ import ManageTokenLists from "@/components/shared/select-token/ManageTokenLists.
 
 import { createNamespacedHelpers } from "vuex";
 
-const { mapState, mapActions } = createNamespacedHelpers("WalletModule");
+const { mapGetters } = createNamespacedHelpers("WalletModule");
 export default {
   name: "SelectTokenModal",
   components: {
@@ -88,9 +88,9 @@ export default {
     };
   },
   computed: {
-    ...mapState(["tokens", "commonTokens"]),
+    ...mapGetters(["allTokens"]),
     selectedToken() {
-      return this.tokens.find((token) => token.address === this.modelValue);
+      return this.allTokens.find((token) => token.address === this.modelValue);
     },
   },
   methods: {

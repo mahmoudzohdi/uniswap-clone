@@ -10,28 +10,27 @@ export default () => ({
         name: "Gemini Token List",
         endpoint: "https://www.gemini.com/uniswap/manifest.json",
         logoURI: "https://gemini.com/static/images/loader.png",
-        tokens: null,
+        tokens: [],
         enabled: true,
       },
       {
-        name: "CoinGecko",
-        endpoint: "https://tokens.coingecko.com/uniswap/all.json",
+        name: "Compound",
+        endpoint:
+          "https://raw.githubusercontent.com/compound-finance/token-list/master/compound.tokenlist.json",
         logoURI:
-          "https://www.coingecko.com/assets/thumbnail-007177f3eca19695592f0b8b0eabbdae282b54154e1be912285c9034ea6cbaf2.png",
-        tokens: null,
+          "https://raw.githubusercontent.com/compound-finance/token-list/master/assets/compound-interface.svg",
+        tokens: [],
         enabled: false,
       },
       {
-        name: "Kleros Tokens",
+        name: "CMC Stablecoin",
         endpoint:
-          "https://cloudflare-ipfs.com/ipfs/QmTh9b6CqFNG1Uf33pGUoQSGZbS1tmLhn6RhaypSP7kjZ2/",
+          "https://cloudflare-ipfs.com/ipfs/QmeopjrU4LAw8bDf8CfajU3smyxfy4AW9vtfASaSw3W7Ha/",
         logoURI:
-          "https://cloudflare-ipfs.com/ipfs/QmRYXpD8X4sQZwA1E4SJvEjVZpEK1WtSrTqzTWvGpZVDwa/",
-        tokens: null,
+          "https://cloudflare-ipfs.com/ipfs/QmQAGtNJ2rSGpnP6dh6PPKNSmZL8RTZXmgFwgTdy5Nz5mx/",
+        tokens: [],
         enabled: false,
       },
     ],
   },
-  tokens: [],
-  commonTokens: [],
 });

@@ -1,7 +1,7 @@
 import { Token } from "@/types/wallet";
 
-export const fetchTokens = (): Promise<Token[]> => {
-  return fetch("https://www.gemini.com/uniswap/manifest.json")
+export const fetchTokens = (endpoint: string): Promise<Token[]> => {
+  return fetch(endpoint)
     .then((res) => res.json())
     .then((res) => {
       return res.tokens;

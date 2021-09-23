@@ -48,7 +48,9 @@ import TransactionSettings from "@/components/swap/TransactionSettings.vue";
 import SelectTokenModal from "@/components/shared/select-token/SelectTokenModal.vue";
 import { createNamespacedHelpers } from "vuex";
 
-const { mapState, mapActions } = createNamespacedHelpers("WalletModule");
+const { mapState, mapGetters, mapActions } = createNamespacedHelpers(
+  "WalletModule"
+);
 
 export default defineComponent({
   name: "SwapBox",
@@ -71,12 +73,13 @@ export default defineComponent({
     };
   },
   computed: {
-    ...mapState(["accountAddress", "tokens"]),
+    ...mapState(["accountAddress"]),
+    ...mapGetters(["allTokens"]),
   },
   methods: {
     ...mapActions(["openConnectWalletModal", "getTokens"]),
     getTokenByAddress(address) {
-      return this.tokens.find((token) => token.address === address);
+      return this.allTokens.find((token) => token.address === address);
     },
   },
   created() {

@@ -17,6 +17,6 @@ export interface TokensProvider {
   name: string;
   endpoint: string;
   logoURI: string;
-  tokens: string[] | null;
+  tokens: string[];
   enabled: boolean;
 }

@@ -13,11 +13,17 @@
             text="These tokens are commonly paired with other tokens."
           />
         </h5>
+
+        <!--
+          line 26: "token in allTokens.slice(0, 6)"
+          it's just a mocking for the common tokens
+        -->
+
         <div class="section-body">
           <Button
             variant="outlined"
             class="token-button"
-            v-for="token in commonTokens"
+            v-for="token in allTokens.slice(0, 6)"
             :key="token.symbol"
             :disabled="token.address === modelValue"
             @click="selectToken(token)"
@@ -35,7 +41,7 @@
       </div>
     </div>
     <ul class="currencies-list">
-      <template v-for="token in tokens">
+      <template v-for="token in allTokens">
         <li
           :class="['token-item', { selected: token.address === modelValue }]"
           @click="selectToken(token)"
@@ -63,7 +69,7 @@ import Input from "@/components/core/Input.vue";
 import InfoTooltip from "@/components/shared/InfoTooltip.vue";
 import { createNamespacedHelpers } from "vuex";
 
-const { mapState } = createNamespacedHelpers("WalletModule");
+const { mapState, mapGetters } = createNamespacedHelpers("WalletModule");
 export default {
   name: "SelectToken",
   components: {
@@ -82,7 +88,8 @@ export default {
     };
   },
   computed: {
-    ...mapState(["tokens", "commonTokens"]),
+    ...mapState(["commonTokens"]),
+    ...mapGetters(["allTokens"]),
   },
   methods: {
     selectToken(token) {

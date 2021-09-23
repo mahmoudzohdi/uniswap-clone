@@ -17,12 +17,19 @@ export default {
   setAccountAddress({ commit }, account: string) {
     commit("SET_ACCOUNT_ADDRESS", account);
   },
-  getTokens({ commit }) {
-    fetchTokens().then((tokens) => {
-      commit("SET_TOKENS", tokens);
-    });
+  getTokens({ commit, state }) {
+    state.manageTokenListsModal.providers.forEach(
+      (provider: TokensProvider) => {
+        provider.enabled &&
+          !provider.tokens?.length &&
+          fetchTokens(provider.endpoint).then((tokens) => {
+            commit("UPDATE_PROVIDER", { ...provider, tokens });
+          });
+      }
+    );
   },
-  updateTokensProvider({ commit }, provider: TokensProvider) {
+  updateTokensProvider({ commit, dispatch }, provider: TokensProvider) {
     commit("UPDATE_PROVIDER", provider);
+    dispatch("getTokens");
   },
 };

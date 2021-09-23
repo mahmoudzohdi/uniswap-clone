@@ -2,15 +2,7 @@
   <section class="swap-box">
     <header class="box-header">
       <h3 class="box-title">Swap</h3>
-      <div class="box-settings">
-        <button class="settings-toggler">
-          <img
-            class="svg-image-to-white"
-            src="@/assets/images/icons/settings-icon.svg"
-            alt="settings icon"
-          />
-        </button>
-      </div>
+      <TransactionSettings />
     </header>
 
     <article class="box-body">
@@ -52,6 +44,7 @@
 import { defineComponent } from "vue";
 import MetaMaskOnboarding from "@metamask/onboarding";
 import Button from "@/components/core/Button.vue";
+import TransactionSettings from "@/components/swap/TransactionSettings.vue";
 import SelectTokenModal from "@/components/shared/select-token/SelectTokenModal.vue";
 import { createNamespacedHelpers } from "vuex";
 
@@ -62,6 +55,7 @@ export default defineComponent({
   components: {
     Button,
     SelectTokenModal,
+    TransactionSettings,
   },
   data() {
     return {
@@ -108,11 +102,6 @@ export default defineComponent({
   .box-title {
     font-size: 16px;
     margin: 0;
-  }
-  .settings-toggler {
-    img {
-      width: 20px;
-    }
   }
 }
 .box-body {

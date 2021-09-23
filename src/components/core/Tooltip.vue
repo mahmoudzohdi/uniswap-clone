@@ -31,11 +31,11 @@ export default {
     return {
       tooltipHolderPosition: {},
       showTooltip: false,
-      debounceTimeout: null,
     };
   },
   methods: {
     mouseenterHandler() {
+      this.updateTooltipHolderPosition();
       this.showTooltip = true;
     },
     mouseleaveHandler() {
@@ -46,19 +46,6 @@ export default {
         "tooltip-holder"
       ].getBoundingClientRect();
     },
-    windowResizeHandler() {
-      clearTimeout(this.debounceTimeout);
-      this.debounceTimeout = setTimeout(this.updateTooltipHolderPosition, 200);
-    },
-  },
-  mounted() {
-    this.updateTooltipHolderPosition();
-  },
-  created() {
-    window.addEventListener("resize", this.windowResizeHandler);
-  },
-  unmounted() {
-    window.removeEventListener("resize", this.windowResizeHandler);
   },
 };
 </script>

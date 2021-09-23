@@ -27,7 +27,7 @@ export default {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-size: 12px;
+  font-size: 13px;
   border-radius: 50%;
   background-color: $darkBorderColor;
   color: $grayText;

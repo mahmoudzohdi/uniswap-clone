@@ -3,7 +3,9 @@
     <div class="app-modal" v-if="isVisible" @click.self="hide">
       <section class="app-modal-content">
         <header class="app-modal-header">
-          <h3 class="header-title">
+          <slot name="headerTitle" v-if="$slots.headerTitle" />
+
+          <h3 class="header-title" v-else>
             {{ title }}
           </h3>
           <Button class="close-modal-button" variant="text" @click="hide">
@@ -25,7 +27,7 @@
         </article>
 
         <footer v-if="$slots.footer" class="app-modal-footer">
-          <slot name="footer"></slot>
+          <slot name="footer" />
         </footer>
       </section>
     </div>

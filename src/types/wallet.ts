@@ -2,7 +2,7 @@ export interface WalletProviderItem {
   name: string;
   image: string;
   href?: string;
-  onClick?: () => Promise<string[]>;
+  onClick?: () => Promise<string>;
 }
 
 export interface Token {

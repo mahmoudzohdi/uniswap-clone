@@ -31,10 +31,10 @@
         variant="primary-text"
         size="large"
         block
-        :disabled="accounts?.length"
+        :disabled="accountAddress"
         @click="openConnectWalletModal"
       >
-        {{ accounts?.length ? "Enter an amount" : "Connect Wallet" }}
+        {{ accountAddress ? "Enter an amount" : "Connect Wallet" }}
       </Button>
     </footer>
   </section>
@@ -71,7 +71,7 @@ export default defineComponent({
     };
   },
   computed: {
-    ...mapState(["accounts", "tokens"]),
+    ...mapState(["accountAddress", "tokens"]),
   },
   methods: {
     ...mapActions(["openConnectWalletModal", "getTokens"]),

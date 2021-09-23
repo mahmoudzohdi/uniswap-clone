@@ -2,7 +2,7 @@ export default () => ({
   connectWalletModal: {
     visibility: false,
   },
-  accounts: [],
+  accountAddress: null,
   manageTokenListsModal: {
     visibility: false,
     providers: [

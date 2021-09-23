@@ -14,8 +14,8 @@ export default {
   closeManageTokenListsModal({ commit }) {
     commit("UPDATE_MANAGE_TOKEN_LISTS_MODAL_VISIBILITY", false);
   },
-  setAccounts({ commit }, accounts: string[]) {
-    commit("SET_ACCOUNTS", accounts);
+  setAccountAddress({ commit }, account: string) {
+    commit("SET_ACCOUNT_ADDRESS", account);
   },
   getTokens({ commit }) {
     fetchTokens().then((tokens) => {

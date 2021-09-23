@@ -37,14 +37,14 @@ export default defineComponent({
     };
   },
   methods: {
-    ...mapActions(["setAccounts"]),
+    ...mapActions(["setAccountAddress"]),
     walletItemClickHandler() {
       this.loading = true;
       this.walletInfo.onClick &&
         this.walletInfo
           .onClick()
-          .then((accounts: string[]) => {
-            this.setAccounts(accounts);
+          .then((accountAddress: string) => {
+            this.setAccountAddress(accountAddress);
             this.$emit("connected");
           })
           .finally(() => {

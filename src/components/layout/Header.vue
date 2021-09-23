@@ -7,15 +7,14 @@
     <AppNav />
 
     <div class="app-menu">
-      <Button v-if="accounts.length" variant="dark" class="user-wallet">
-        {{ truncate(accounts[0], 10) }}
+      <Button v-if="accountAddress" variant="dark" class="user-wallet">
+        {{ truncate(accountAddress, 10) }}
       </Button>
       <Button
         v-else
         class="connect-wallet-button"
         variant="primary-text"
         block
-        :disabled="accounts?.length"
         @click="openConnectWalletModal"
       >
         {{ "Connect Wallet" }}
@@ -52,21 +51,17 @@ export default defineComponent({
     };
   },
   computed: {
-    ...mapState(["accounts"]),
+    ...mapState(["accountAddress"]),
   },
   methods: {
-    ...mapActions(["openConnectWalletModal", "setAccounts"]),
+    ...mapActions(["openConnectWalletModal", "setAccountAddress"]),
   },
   mounted() {
     if (
       MetaMaskOnboarding.isMetaMaskInstalled() &&
       window["ethereum"].isConnected()
     ) {
-      window["ethereum"]
-        .request({ method: "eth_requestAccounts" })
-        .then((accounts: Array<string>) => {
-          this.setAccounts(accounts);
-        });
+      this.setAccountAddress(window["ethereum"].selectedAddress);
     }
   },
 });

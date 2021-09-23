@@ -7,8 +7,8 @@ export default {
   UPDATE_MANAGE_TOKEN_LISTS_MODAL_VISIBILITY(state, visibility: boolean): void {
     state.manageTokenListsModal.visibility = visibility;
   },
-  SET_ACCOUNTS(state, accounts: string[]): void {
-    state.accounts = accounts;
+  SET_ACCOUNT_ADDRESS(state, accountAddress: string): void {
+    state.accountAddress = accountAddress;
   },
   SET_TOKENS(state, tokens: Token[]): void {
     state.tokens = tokens;

@@ -16,7 +16,7 @@
     <article class="box-body">
       <div class="currency-input">
         <div class="input-holder">
-          <SelectToken v-model="swapFrom.address" />
+          <SelectTokenModal v-model="swapFrom.address" />
           <input placeholder="0.0" v-model="swapFrom.value" />
         </div>
         <p class="input-note" v-if="isMetaMaskInstalled && swapFrom.address">
@@ -25,7 +25,7 @@
       </div>
       <div class="currency-input">
         <div class="input-holder">
-          <SelectToken v-model="swapTo.address" />
+          <SelectTokenModal v-model="swapTo.address" />
           <input placeholder="0.0" v-model="swapTo.value" />
         </div>
         <p class="input-note" v-if="isMetaMaskInstalled && swapTo.address">
@@ -52,7 +52,7 @@
 import { defineComponent } from "vue";
 import MetaMaskOnboarding from "@metamask/onboarding";
 import Button from "@/components/core/Button.vue";
-import SelectToken from "@/components/shared/SelectToken.vue";
+import SelectTokenModal from "@/components/shared/select-token/SelectTokenModal.vue";
 import { createNamespacedHelpers } from "vuex";
 
 const { mapState, mapActions } = createNamespacedHelpers("WalletModule");
@@ -61,7 +61,7 @@ export default defineComponent({
   name: "SwapBox",
   components: {
     Button,
-    SelectToken,
+    SelectTokenModal,
   },
   data() {
     return {
@@ -82,7 +82,7 @@ export default defineComponent({
   methods: {
     ...mapActions(["openConnectWalletModal", "getTokens"]),
     getTokenByAddress(address) {
-      return this.tokens.data.find((token) => token.address === address);
+      return this.tokens.find((token) => token.address === address);
     },
   },
   created() {

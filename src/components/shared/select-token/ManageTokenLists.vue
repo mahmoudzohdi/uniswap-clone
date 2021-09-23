@@ -16,7 +16,7 @@
   <template v-if="activeTab === 'lists-tab'">
     <div class="search-input-holder">
       <Input
-        type="text"
+        size="large"
         placeholder="Search name or paste address"
         v-model="searchText"
       />
@@ -46,7 +46,7 @@
   </template>
   <template v-if="activeTab === 'tokens-tab'">
     <div class="search-input-holder">
-      <Input type="text" placeholder="0x0000" v-model="customTokenAddress" />
+      <Input size="large" placeholder="0x0000" v-model="customTokenAddress" />
     </div>
     <div class="custom-tokens">
       <p class="note">

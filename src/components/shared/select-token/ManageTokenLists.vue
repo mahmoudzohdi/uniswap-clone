@@ -30,8 +30,8 @@
         <img class="item-image" :src="provider.logoURI" :alt="provider.name" />
         <div class="item-name-holder">
           <h5 class="item-name">{{ provider.name }}</h5>
-          <p class="tokens-count">
-            28 tokens
+          <p class="tokens-count" v-if="provider.tokens.length">
+            {{ provider.tokens.length }} tokens
           </p>
         </div>
         <SwitchInput

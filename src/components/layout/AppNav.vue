@@ -77,5 +77,11 @@ export default defineComponent({
       }
     }
   }
+  @media (max-width: 991px) {
+    position: fixed;
+    bottom: 0px;
+    right: 50%;
+    transform: translate(50%, -50%);
+  }
 }
 </style>

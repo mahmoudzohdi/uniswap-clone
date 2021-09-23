@@ -124,6 +124,7 @@ export default defineComponent({
     justify-content: space-between;
   }
   input {
+    min-width: 50px;
     background: none;
     border: none;
     font-size: 24px;

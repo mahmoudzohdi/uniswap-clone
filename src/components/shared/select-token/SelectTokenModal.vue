@@ -136,6 +136,7 @@ export default {
   margin-bottom: 8px;
   align-items: center;
   font-size: 18px;
+  white-space: nowrap;
 
   .token-image {
     width: 24px;

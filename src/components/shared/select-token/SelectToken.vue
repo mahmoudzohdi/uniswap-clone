@@ -1,7 +1,7 @@
 <template>
   <div class="tokens-filters">
     <Input
-      type="text"
+      size="large"
       placeholder="Search name or paste address"
       v-model="searchText"
     />
